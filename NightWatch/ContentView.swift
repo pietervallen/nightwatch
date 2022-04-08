@@ -13,41 +13,48 @@ let monthlyTasks = ["Test security alarm", "Test motion detectors", "Test smoke 
 
 struct ContentView: View {
     var body: some View {
-        List{
-            Section(header: HStack {
-                Image(systemName: "moon.stars")
-                Text("Nightly Tasks")
-            }.font(.title3)) {
-                ForEach(nightlyTasks, id: \.self, content:  {
-                    taskName in
-                    Text(taskName)
-                })
+        NavigationView {
+            List{
+                Section(header: TaskSectionHeader(symbolSystemName: "moon.stars", headerText: "Nightly Tasks")) {
+                    ForEach(nightlyTasks, id: \.self, content:  {
+                        taskName in
+                        NavigationLink(taskName, destination: DetailsView(taskName: taskName))
+                    })
+                }
+                Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
+                    ForEach(weeklyTasks, id: \.self, content:  {
+                        taskName in
+                        NavigationLink(taskName, destination: DetailsView(taskName: taskName))
+                    })
+                }
+                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
+                    ForEach(monthlyTasks, id: \.self, content:  {
+                        taskName in
+                        NavigationLink(taskName, destination: DetailsView(taskName: taskName))
+                    })
+                }
             }
-            Section(header: HStack {
-                Image(systemName: "sunset")
-                Text("Weekly Tasks")
-            }.font(.title3)) {
-                ForEach(weeklyTasks, id: \.self, content:  {
-                    taskName in
-                    Text(taskName)
-                })
-            }
-            Section(header: HStack {
-                Image(systemName: "calendar")
-                Text("Monthly Tasks")
-            }.font(.title3)) {
-                ForEach(monthlyTasks, id: \.self, content:  {
-                    taskName in
-                    Text(taskName)
-                })
-            }
+            .listStyle(GroupedListStyle())
+            .navigationTitle("Home")
         }
+    }
+}
+
+struct TaskSectionHeader: View {
+    let symbolSystemName: String
+    let headerText: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: symbolSystemName)
+            Text(headerText)
+        }.font(.title3)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.portrait)
     }
 }
