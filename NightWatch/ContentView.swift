@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var nightWatchTasks: NightWatchTasks
+    @State private var focusModeOn = false
+    @State private var resetAlertShowing = false
     
     var body: some View {
         NavigationView {
@@ -32,12 +34,23 @@ struct ContentView: View {
                         // If I get a task out of that Binding<[Task]> (tasksBinding), will that "element" be a Binding to a Task (Binding<Task>)?
                         let theTaskBinding = tasksBinding[taskIndex]
                         
-                        NavigationLink(
-                            destination: DetailsView(task: theTaskBinding),
-                            label: {
-                                TaskRow(task: task)
+                        // Always show with focusMode = Off
+                        // Also show when focusMode = On --AND-- The task is incomplete
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
                             })
+                        }
+                    }).onDelete(perform: { indexSet in
+                        nightWatchTasks.nightlyTasks
+                            .remove(atOffsets: indexSet)
                     })
+                    .onMove { indices, newOffset in
+                        nightWatchTasks.nightlyTasks
+                            .move(fromOffsets: indices, toOffset: newOffset)
+                    }
                 }
                 Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
                     
@@ -58,12 +71,23 @@ struct ContentView: View {
                         // If I get a task out of that Binding<[Task]> (tasksBinding), will that "element" be a Binding to a Task (Binding<Task>)?
                         let theTaskBinding = tasksBinding[taskIndex]
                         
-                        NavigationLink(
-                            destination: DetailsView(task: theTaskBinding),
-                            label: {
-                                TaskRow(task: task)
+                        // Always show with focusMode = Off
+                        // Also show when focusMode = On --AND-- The task is incomplete
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
                             })
+                        }
+                    }).onDelete(perform: { indexSet in
+                        nightWatchTasks.weeklyTasks
+                            .remove(atOffsets: indexSet)
                     })
+                    .onMove { indices, newOffset in
+                        nightWatchTasks.weeklyTasks
+                            .move(fromOffsets: indices, toOffset: newOffset)
+                    }
                 }
                 Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
                     
@@ -84,37 +108,51 @@ struct ContentView: View {
                         // If I get a task out of that Binding<[Task]> (tasksBinding), will that "element" be a Binding to a Task (Binding<Task>)?
                         let theTaskBinding = tasksBinding[taskIndex]
                         
-                        NavigationLink(
-                            destination: DetailsView(task: theTaskBinding),
-                            label: {
-                                TaskRow(task: task)
+                        // Always show with focusMode = Off
+                        // Also show when focusMode = On --AND-- The task is incomplete
+                        if focusModeOn == false || (focusModeOn == true && task.isComplete == false) {
+                            NavigationLink(
+                                destination: DetailsView(task: theTaskBinding),
+                                label: {
+                                    TaskRow(task: task)
                             })
+                        }
+                    }).onDelete(perform: { indexSet in
+                        nightWatchTasks.monthlyTasks
+                            .remove(atOffsets: indexSet)
                     })
+                    .onMove { indices, newOffset in
+                        nightWatchTasks.monthlyTasks
+                            .move(fromOffsets: indices, toOffset: newOffset)
+                    }
                 }
-//                Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
-//                    ForEach(nightWatchTasks.weeklyTasks,
-//                            content:  {
-//                        task in
-//                        NavigationLink(
-//                            destination: DetailsView(task: task),
-//                            label: {
-//                                TaskRow(task: task)
-//                            })
-//                    })
-//                }
-//                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
-//                    ForEach(nightWatchTasks.monthlyTasks, content:  {
-//                        task in
-//                        NavigationLink(
-//                            destination: DetailsView(task: task),
-//                            label: {
-//                                TaskRow(task: task)
-//                            })
-//                    })
-//                }
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Home")
+            .toolbar {
+                ToolbarItem (placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                
+                ToolbarItem (placement: .navigationBarTrailing) {
+                    Button("Reset") {
+                        resetAlertShowing = true
+                    }
+                }
+                
+                ToolbarItem (placement: .bottomBar) {
+                    Toggle(isOn: $focusModeOn, label: {
+                        Text("Focus Mode")
+                    }).toggleStyle(.switch)
+                }
+            }
+        }.alert(isPresented: $resetAlertShowing) {
+            Alert(title: Text("Reset list"), message: Text("Are you sure?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Yes, reset it"), action: {
+                let refreshedNightWatchTasks = NightWatchTasks()
+                self.nightWatchTasks.nightlyTasks = refreshedNightWatchTasks.nightlyTasks
+                self.nightWatchTasks.weeklyTasks = refreshedNightWatchTasks.weeklyTasks
+                self.nightWatchTasks.monthlyTasks = refreshedNightWatchTasks.monthlyTasks
+            }))
         }
     }
 }
