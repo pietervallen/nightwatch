@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		4C4E552B27FFD5F500CF9373 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E552A27FFD5F500CF9373 /* DetailsView.swift */; };
 		4C4E553127FFD9AF00CF9373 /* DemoTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E553027FFD9AF00CF9373 /* DemoTabbarView.swift */; };
-		4C4E55332800B72600CF9373 /* TaskStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E55322800B72600CF9373 /* TaskStruct.swift */; };
+		4C4E55332800B72600CF9373 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E55322800B72600CF9373 /* Task.swift */; };
 		4C4E55352800BE8300CF9373 /* DemoStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E55342800BE8300CF9373 /* DemoStateView.swift */; };
+		4C4E553728035F8E00CF9373 /* NightWatchTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E553628035F8E00CF9373 /* NightWatchTasks.swift */; };
 		4C91321227EBDD1A00937A02 /* NightWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91321127EBDD1A00937A02 /* NightWatchApp.swift */; };
 		4C91321427EBDD1A00937A02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C91321327EBDD1A00937A02 /* ContentView.swift */; };
 		4C91321627EBDD1D00937A02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C91321527EBDD1D00937A02 /* Assets.xcassets */; };
@@ -20,8 +21,9 @@
 /* Begin PBXFileReference section */
 		4C4E552A27FFD5F500CF9373 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		4C4E553027FFD9AF00CF9373 /* DemoTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTabbarView.swift; sourceTree = "<group>"; };
-		4C4E55322800B72600CF9373 /* TaskStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStruct.swift; sourceTree = "<group>"; };
+		4C4E55322800B72600CF9373 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		4C4E55342800BE8300CF9373 /* DemoStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoStateView.swift; sourceTree = "<group>"; };
+		4C4E553628035F8E00CF9373 /* NightWatchTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchTasks.swift; sourceTree = "<group>"; };
 		4C91320E27EBDD1A00937A02 /* NightWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C91321127EBDD1A00937A02 /* NightWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchApp.swift; sourceTree = "<group>"; };
 		4C91321327EBDD1A00937A02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,11 +64,12 @@
 				4C91321127EBDD1A00937A02 /* NightWatchApp.swift */,
 				4C91321327EBDD1A00937A02 /* ContentView.swift */,
 				4C4E552A27FFD5F500CF9373 /* DetailsView.swift */,
+				4C4E55322800B72600CF9373 /* Task.swift */,
+				4C4E553628035F8E00CF9373 /* NightWatchTasks.swift */,
 				4C91321527EBDD1D00937A02 /* Assets.xcassets */,
 				4C91321727EBDD1D00937A02 /* Preview Content */,
 				4C4E553027FFD9AF00CF9373 /* DemoTabbarView.swift */,
 				4C4E55342800BE8300CF9373 /* DemoStateView.swift */,
-				4C4E55322800B72600CF9373 /* TaskStruct.swift */,
 			);
 			path = NightWatch;
 			sourceTree = "<group>";
@@ -151,9 +154,10 @@
 			files = (
 				4C91321427EBDD1A00937A02 /* ContentView.swift in Sources */,
 				4C91321227EBDD1A00937A02 /* NightWatchApp.swift in Sources */,
-				4C4E55332800B72600CF9373 /* TaskStruct.swift in Sources */,
+				4C4E55332800B72600CF9373 /* Task.swift in Sources */,
 				4C4E55352800BE8300CF9373 /* DemoStateView.swift in Sources */,
 				4C4E552B27FFD5F500CF9373 /* DetailsView.swift in Sources */,
+				4C4E553728035F8E00CF9373 /* NightWatchTasks.swift in Sources */,
 				4C4E553127FFD9AF00CF9373 /* DemoTabbarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
